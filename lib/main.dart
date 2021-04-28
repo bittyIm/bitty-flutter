@@ -1,11 +1,17 @@
+import 'package:bitty/circle.dart';
+import 'package:bitty/user_drawer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import 'event/event.dart';
+import 'event/user_event.dart';
+import 'home.dart';
+
 Future<void> main() async {
-  runApp(DinotApp());
+  runApp(BittyApp());
 }
 
-class DinotApp extends StatelessWidget {
+class BittyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,8 +31,12 @@ class BittyHomePage extends StatefulWidget {
 }
 
 class _BittyHomePageState extends State<BittyHomePage> with SingleTickerProviderStateMixin {
+  var _pageController = new PageController(initialPage: 1);
   @override
   void initState() {
+    eventBus.on<UserEvent>().listen((event) {
+      _pageController.jumpToPage(0);
+    });
     super.initState();
   }
 
@@ -37,6 +47,10 @@ class _BittyHomePageState extends State<BittyHomePage> with SingleTickerProvider
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Text("111"));
+    return Scaffold(
+        body: PageView(
+      controller: _pageController,
+      children: [UserDrawer(), Home(), Circle()],
+    ));
   }
 }
