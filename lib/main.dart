@@ -1,4 +1,6 @@
 import 'package:bitty/circle.dart';
+import 'package:bitty/page/select_user.dart';
+import 'package:bitty/page/select_user_advance.dart';
 import 'package:bitty/user_drawer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -17,21 +19,22 @@ class BittyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Bitty',
       theme: ThemeData(primaryColor: Color(0xffffffff), primarySwatch: Colors.blue),
-      home: BittyHomePage(title: '仪表盘'),
+      routes: {
+        "/":(ctx)=>BittyHomePage(),
+        "/select_user":(ctx)=>SelectUser(),
+        "/select_user_advance":(ctx)=>SelectUserAdvance()
+      },
     );
   }
 }
 
 class BittyHomePage extends StatefulWidget {
-  BittyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
-
   @override
   _BittyHomePageState createState() => _BittyHomePageState();
 }
 
 class _BittyHomePageState extends State<BittyHomePage> with SingleTickerProviderStateMixin {
-  var _pageController = new PageController(initialPage: 1);
+  var _pageController = new PageController(initialPage: 0);
   @override
   void initState() {
     eventBus.on<UserEvent>().listen((event) {
@@ -50,7 +53,7 @@ class _BittyHomePageState extends State<BittyHomePage> with SingleTickerProvider
     return Scaffold(
         body: PageView(
       controller: _pageController,
-      children: [UserDrawer(), Home(), Circle()],
+      children: [ Home(), Circle()],
     ));
   }
 }
