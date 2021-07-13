@@ -1,5 +1,3 @@
-import 'package:bitty/circle.dart';
-import 'package:bitty/user_drawer.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -50,7 +48,7 @@ class _BittyHomePageState extends State<BittyHomePage> with SingleTickerProvider
     return Scaffold(
         body: PageView(
       controller: _pageController,
-      children: [UserDrawer(), Home(), Circle()],
+      children: [Home()],
     ));
   }
 }
