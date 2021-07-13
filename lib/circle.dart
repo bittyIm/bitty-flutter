@@ -8,6 +8,6 @@ class Circle extends StatefulWidget {
 class _homeState extends State<Circle> {
   @override
   Widget build(BuildContext context) {
-    return Container(child: Text("朋友圈"));
+    return Container(child: Text("1"));
   }
 }
